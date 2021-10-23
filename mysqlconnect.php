@@ -1,5 +1,5 @@
 <?php 
-		$con= mysqli_connect("localhost","root","","garikoi");
+		$con= mysqli_connect("localhost","root","root","garikoi");
 
 
 		 // $query= "SELECT*FROM cars ORDER BY sl ASC";
