@@ -7,7 +7,7 @@
   <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
@@ -28,7 +28,7 @@
 
 
   </head>
-  <body >
+  <body class="container-fluid" >
   <div class="container-fluid">
       
 <!--  NAV Menu Bar -->
@@ -62,7 +62,7 @@
                         <a class="nav-link" href="index.php#quote">Get-a-Quotation</a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link" href="adminpanel/admin.php">Admin</a>
+                        
                       </li>
                     </ul>
                     
@@ -111,16 +111,7 @@
 
            
         </div>
-       <!--  <div class="jumbotron" style="position: relative  !important; z-index: 999 !important; background-color: transparent !important; ">
-          <h1 class="display-2 text-info">Welcome to GariKoi.com!</h1>
-              <p class="lead text-info">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
-              <hr class="my-4 text-succsess">
-              <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
-              <p class="lead">
-                <a class="btn btn-light btn-lg text-dark" href="#" role="button">Learn more</a>
-              </p>
-        </div>  --> 
-          
+       
       </div>
 
     </div>  

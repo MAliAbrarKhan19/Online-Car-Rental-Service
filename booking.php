@@ -22,6 +22,18 @@ if (isset($_GET['action'])) {
 
 if(isset($_POST['submit']))
 {	include 'mysqlconnect.php';
+	$available_cars=$_POST['available_cars'];
+	$booking_numofcars= mysqli_real_escape_string($con,$_POST['booking_numofcars']);
+	if ($booking_numofcars> $available_cars) {
+		// No cars
+		echo "<script>alert('Sorry!! No cars Left. Please choose another ride...''); </script>";
+
+	} else {
+		// code...
+	}
+	
+
+
 
 	$booking_time= mysqli_real_escape_string($con,$_POST['booking_time']);
 	$booking_date= mysqli_real_escape_string($con,$_POST['booking_date']);
@@ -33,12 +45,12 @@ if(isset($_POST['submit']))
 	$booking_pickupaddress= mysqli_real_escape_string($con,$_POST['booking_pickupaddress']);
 	$booking_dropoffaddress= mysqli_real_escape_string($con,$_POST['booking_dropoffaddress']);
 	$booking_ride_id= mysqli_real_escape_string($con,$_POST['booking_ride_id']);
-	$booking_numofcars= mysqli_real_escape_string($con,$_POST['booking_numofcars']);
+
+
 
 	 
 	$in="INSERT INTO booking(booking_time,booking_date,booking_name,booking_mobile,booking_passengernum,booking_pickuptime,booking_pickupdate,booking_pickupaddress,booking_dropoffaddress,booking_ride_id,booking_numofcars) VALUES ('$booking_time','$booking_date','$booking_name','$booking_mobile','$booking_passengernum','$booking_pickuptime','$booking_pickupdate','$booking_pickupaddress','$booking_dropoffaddress','$booking_ride_id','$booking_numofcars')";
-	//INSERT INTO `booking`(`booking_id`, `booking_datetime`, `booking_time`, `booking_date`, `booking_name`, `booking_mobile`, `booking_passengernum`, `booking_pickuptime`, `booking_pickupdate`, `booking_pickupaddress`, `booking_dropoffaddress`, `booking_ride_id`, `booking_numofcars`) VALUES ([value-1],[value-2],[value-3],[value-4],[value-5],[value-6],[value-7],[value-8],[value-9],[value-10],[value-11],[value-12],[value-13])
-
+ 
 
 	if(mysqli_query($con, $in))
 	{
@@ -89,7 +101,11 @@ if(isset($_POST['submit']))
 						                                  <h4 class="text-info bg-dark p-1">Car Type : <?php echo $row['ride_type']; ?></h4>
 						                                  <h5 class="card-title">Car Name: <?php echo $row['ride_name']; ?></h5>
 						                                  <h6 class="">Passengers : <?php echo $row['ride_passengercap']; ?> max </h6>
-						                                  <h6  class="card-title ">Baggage : <?php  echo $row['ride_baggagecap']; ?></h6>
+						                                  <h6  class="card-title ">Baggage : <?php  echo $row['ride_baggagecap']; ?> Kgs</h6>
+						                                  <h6  class="card-title ">No of Cars : <?php  echo $row['ride_count']; ?></h6>
+						                                  <h6  class="card-title ">Available Cars : <?php$available_cars=$row['ride_count_status'];  
+						                                  echo $row['ride_count_status']; ?></h6>
+						                                </div>
 						                                </div>
 						                         </div>
 						                     </div>
@@ -178,6 +194,7 @@ if(isset($_POST['submit']))
 							      <input type="hidden" name="booking_ride_id" class="form-control" value="<?php echo $booking_ride_id ?>" required>
 							      <label for="validationCustom01">Number of Cars</label>
 							      <input type="text" name="booking_numofcars" class="form-control" id="validationCustom01" placeholder="1" required>
+							      <input type="hidden" name="available_cars=" value="<?php echo $available_cars;?>">
 							      <div class="valid-feedback">
 							        Looks good!
 							      </div>

@@ -48,6 +48,10 @@ if(isset($_POST['submit']))
 	//$ride_image= mysqli_real_escape_string($_POST['ride_image']);
 	$ride_passengercap= $_POST['ride_passengercap'];
 	$ride_baggagecap= $_POST['ride_baggagecap'];
+	$ride_count= $_POST['ride_count'];
+	$ride_count_status= $_POST['ride_count'];
+
+	//ride_count
 	//code for image uploading
 	if($_FILES['ride_image']['name'])
 	{
@@ -56,7 +60,6 @@ if(isset($_POST['submit']))
 	}
 	 
 	$i="INSERT INTO rides (ride_type,ride_name,ride_image,ride_passengercap,ride_baggagecap) VALUES ('$ride_type','$ride_name','$ride_image','$ride_passengercap','$ride_baggagecap')";
-	//INSERT INTO `rides`(`ride_id`, `ride_type`, `ride_name`, `ride_image`, `ride_passengercap`, `ride_baggagecap`) VALUES ([value-1],[value-2],[value-3],[value-4],[value-5],[value-6])
 	if(mysqli_query($con, $i))
 	{
 	echo "<script type='text/javascript'>alert('inserted successfully..!')</script>";
@@ -111,6 +114,10 @@ if(isset($_POST['submit']))
 								<input class="form-control form-control-lg" type="text" name="ride_baggagecap">
 							</div>
 
+							<div class="form-group">
+				    			<label  >Number of Cars </label>
+								<input class="form-control form-control-lg" type="text" name="ride_count">
+							</div>
 							
 							<div class="form-group">
 				    			<label  >Image</label>
@@ -165,6 +172,8 @@ if(isset($_POST['submit']))
 		                                  <h4 class="card-title">Car Name: <?php echo $row['ride_name']; ?></h4>
 		                                  <h6 class="">Passengers : <?php echo $row['ride_passengercap']; ?> max </h6>
 		                                  <h6  class="card-title ">Baggage : <?php  echo $row['ride_baggagecap']; ?></h6>
+		                                  <h6  class="card-title ">No of Cars : <?php  echo $row['ride_count']; ?></h6>
+		                                  <h6  class="card-title ">Available Cars : <?php  echo $row['ride_count_status']; ?></h6>
 		                                </div>
 		                                <!-- Submit Button -->
 		                                  <!-- <input type="submit" name="booking" action="booking.php?action=booking&id=<?php echo $row['ride_type']; ?>" class="btn btn-dark btn-lg btn-block text-white" width="60%" value="BOOK NOW / এখনই বুক করুন " style="">  -->
