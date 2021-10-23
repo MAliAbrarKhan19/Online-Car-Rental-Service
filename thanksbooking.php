@@ -13,7 +13,6 @@ include 'mysqlconnect.php';
 
 
 ?>
- <!-- <script type="text/javascript">alert('NOT inserted! ! ! Error!!')</script> -->
 
 
 
