@@ -108,6 +108,8 @@
                                 </div>
                                 <h6  class="card-title ">No of Cars : <?php  echo $row['ride_count']; ?></h6>
                                 <h6  class="card-title ">Available Cars : <?php  echo $row['ride_count_status']; ?></h6>
+                                <h6  class="card-title ">Cost Cars : <?php echo $row['ride_cost']; ?></h6>
+
                                     </div>
                                 <!-- Submit Button -->
                                   <!-- <input type="submit" name="booking" action="booking.php?action=booking&id=<?php echo $row['ride_type']; ?>" class="btn btn-dark btn-lg btn-block text-white" width="60%" value="BOOK NOW / এখনই বুক করুন " style="">  -->

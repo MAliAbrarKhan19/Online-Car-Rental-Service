@@ -40,19 +40,19 @@ if(isset($_POST['submit'])){
 	$booking_numofcars= $_POST['booking_numofcars'];
 	$available_cars=$_SESSION['available_cars'];
 	
-	echo "available_cars ".$available_cars." \  booking_numofcars ".$booking_numofcars;
+	echo "available_cars ".$available_cars." \  booking_numofcars ".$booking_numofcars."booking_ride_id ".$booking_ride_id;
 
 	if ($booking_numofcars>$available_cars) {
 		echo "<script>alert('Cars not avaiable!!');</script>";
 		//echo "<script>window.location.assign('index.php')</script>";
 	} else {
 
-		include './mysqlconnect.php';
+		include 'mysqlconnect.php';
 
 		$available_cars= $available_cars-$booking_numofcars;
-
-		$up="UPDATE rides SET ride_status='$available_cars'WHERE ride_id='$booking_ride_id'";
-		if(mysqli_query($con,$up))
+		include 'mysqlconnect.php';
+		$i="UPDATE rides SET ride_status='$available_cars'WHERE ride_id='$booking_ride_id' ";
+		if(mysqli_query($con,$i))
 		{
 		echo "<script type='text/javascript'>alert('Ride Updated!Car avaiable!!')</script>";
 		}
@@ -100,11 +100,8 @@ if(isset($_POST['submit'])){
 							            if ($num_rows > 0){
 							              while ($row = mysqli_fetch_assoc($result)){
 									?>
-								<div class="col-md-10 offset-md-2 col-sm-10 border border-dark" 
-                                          style="border-width: 6px !important; 
-                                                margin-left: 24px !important;
-                                                margin-bottom: 12px !important;
-                                          ">
+								<div class="col-md-10 offset-md-2 col-sm-10 border border-dark" style="border-width: 6px !important;margin-left: 24px !important;
+                                                margin-bottom: 12px !important;">
 						                        <div class="row " >
 						                          <div class="col-md-2 align-middle">
 						                            <img src="<?php echo $row['ride_image']; ?>" class="img-fluid" alt="" style="height: 100px !important; ">
@@ -119,6 +116,7 @@ if(isset($_POST['submit'])){
 						                                  <h6  class="card-title ">No of Cars : <?php  echo $row['ride_count']; ?></h6>
 						                                  <?php $_SESSION['available_cars']=$row['ride_count_status']; ?>
 						                                  <h6  class="card-title ">Available Cars : <?php echo $row['ride_count_status']; ?></h6>
+						                                  <h6  class="card-title ">Cost Cars : <?php echo $row['ride_cost']; ?></h6>
 						                                </div>
 						                                </div>
 						                         </div>
