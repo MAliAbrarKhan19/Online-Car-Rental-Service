@@ -26,17 +26,17 @@ if(isset($_POST['submit'])){
 	
 
 
-	$booking_time= mysqli_real_escape_string($con,$_POST['booking_time']);
-	$booking_date= mysqli_real_escape_string($con,$_POST['booking_date']);
-	$booking_name= mysqli_real_escape_string($con,$_POST['booking_name']);
-	$booking_mobile= mysqli_real_escape_string($con,$_POST['booking_mobile']);
-	$booking_email= mysqli_real_escape_string($con,$_POST['booking_email']);
-	$booking_passengernum= mysqli_real_escape_string($con,$_POST['booking_passengernum']);
-	$booking_pickuptime= mysqli_real_escape_string($con,$_POST['booking_pickuptime']);
-	$booking_pickupdate= mysqli_real_escape_string($con,$_POST['booking_pickupdate']);
-	$booking_pickupaddress= mysqli_real_escape_string($con,$_POST['booking_pickupaddress']);
-	$booking_dropoffaddress= mysqli_real_escape_string($con,$_POST['booking_dropoffaddress']);
-	$booking_ride_id= mysqli_real_escape_string($con,$_POST['booking_ride_id']);
+	$booking_time=  $_POST['booking_time'];
+	$booking_date=  $_POST['booking_date'];
+	$booking_name=  $_POST['booking_name'];
+	$booking_mobile=  $_POST['booking_mobile'];
+	$booking_email=  $_POST['booking_email'];
+	$booking_passengernum=  $_POST['booking_passengernum'];
+	$booking_pickuptime=  $_POST['booking_pickuptime'];
+	$booking_pickupdate=  $_POST['booking_pickupdate'];
+	$booking_pickupaddress=  $_POST['booking_pickupaddress'];
+	$booking_dropoffaddress=  $_POST['booking_dropoffaddress'];
+	$booking_ride_id=  $_POST['booking_ride_id'];
 	$booking_numofcars= $_POST['booking_numofcars'];
 	$available_cars=$_SESSION['available_cars'];
 	
@@ -53,23 +53,23 @@ if(isset($_POST['submit'])){
 		include 'mysqlconnect.php';
 		$i="UPDATE rides SET ride_status='$available_cars'WHERE ride_id='$booking_ride_id' ";
 		if(mysqli_query($con,$i))
-		{
-		echo "<script type='text/javascript'>alert('Ride Updated!Car avaiable!!')</script>";
+		{ echo "<script type='text/javascript'>alert('Ride Updated!Car avaiable!!')</script>";
 		}
 		else {
 			echo "<script type='text/javascript'>alert('!!NOT Submitted  Successfully.! ! ! ERROR!!CAR NOT Updated.')</script>";
 		}
+		include 'mysqlconnect.php';
 
-		// $in="INSERT INTO booking(booking_time,booking_date,booking_name,booking_mobile,booking_passengernum,booking_pickuptime,booking_pickupdate,booking_pickupaddress,booking_dropoffaddress,booking_ride_id,booking_numofcars) VALUES ('$booking_time','$booking_date','$booking_name','$booking_mobile','$booking_passengernum','$booking_pickuptime','$booking_pickupdate','$booking_pickupaddress','$booking_dropoffaddress','$booking_ride_id','$booking_numofcars')";
+		$in="INSERT INTO booking(booking_time,booking_date,booking_name,booking_mobile,booking_passengernum,booking_pickuptime,booking_pickupdate,booking_pickupaddress,booking_dropoffaddress,booking_ride_id,booking_numofcars) VALUES ('$booking_time','$booking_date','$booking_name','$booking_mobile','$booking_passengernum','$booking_pickuptime','$booking_pickupdate','$booking_pickupaddress','$booking_dropoffaddress','$booking_ride_id','$booking_numofcars')";
 
-		// if(mysqli_query($con, $in))
-		// {
-		// echo "<script type='text/javascript'>alert('Your booking is successfully submitted. Now please wait for our agent to call back to confirm the booking. Thankyou!')</script>";
-		// echo "<script>window.location.assign('thanksbooking.php')</script>";
-		// }
-		// else {
-		// 	echo "<script type='text/javascript'>alert('!!NOT Submitted  Successfully.! ! ! ERROR!!Please submit again. Thankyou...')</script>";
-		// }
+		if(mysqli_query($con, $in))
+		{
+		echo "<script type='text/javascript'>alert('Your booking is successfully submitted. Now please wait for our agent to call back to confirm the booking. Thankyou!')</script>";
+		echo "<script>window.location.assign('thanksbooking.php')</script>";
+		}
+		else {
+			echo "<script type='text/javascript'>alert('!!NOT Submitted  Successfully.! ! ! ERROR!!Please submit again. Thankyou...')</script>";
+		}
 
 		
 	}
