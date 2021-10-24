@@ -6,13 +6,6 @@
 <!--   Header Ends     -->
 <!--=============================================Body=============================================  -->
 
-
-
-<!-- 
-====================================================================================================================
-                                              Display
-====================================================================================================================
--->
   <!--=======================================About Us=============================================  -->
   <div class="row " >
     <!-- --------------------------------------------------------------------------------------- -->
@@ -67,14 +60,15 @@
 <div class="row">
   <!-- register  -->
       <div class="col-md-6">
+      <div class="row bg-dark m-1 text-center">
+                <h2 class="text-white ">Login</h2>
+              </div>
         <div class="row">
           <div class="col-md-12">
           <form method="post" action="index.php">
-              <?php include('errors.php'); ?>
+              <?php //include('errors.php'); ?>
               
-              <div class="row bg-dark m-1 text-center">
-                <h2 class="text-white ">Login</h2>
-              </div>
+              
                 <div class="input-group p-1">
                   <label>User Name  </label>
                   <input type="text" class="form-control m-1" name="username" >
@@ -92,14 +86,14 @@
         </div>
       </div>
       <!-- login -->
-      <div class="col-md-6">
+      <div class="col-md-6 p-1">
         <div class="row bg-dark m-1 text-center">
-           <h2 class="text-white ">Login</h2>
+           <h2 class="text-white ">Register</h2>
         </div>
 
-          <form method="post" action="index.php">
+          <form method="post" action="index.php" class=" p-2 m-1">
 
-              <?php include('errors.php'); ?>
+              <?php //include('errors.php'); ?>
 
               <div class="input-group">
                 <label>Admin Name </label>
