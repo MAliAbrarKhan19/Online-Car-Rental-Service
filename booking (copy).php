@@ -18,68 +18,41 @@ if (isset($_GET['action'])) {
 }
 // echo " Ride id = ".$booking_ride_id;
 
-include 'mysqlconnect.php';
 
 
+if(isset($_POST['submit']))
+{	include 'mysqlconnect.php';
 
-if(isset($_POST['submit'])){
-	
+	$booking_time= mysqli_real_escape_string($con,$_POST['booking_time']);
+	$booking_date= mysqli_real_escape_string($con,$_POST['booking_date']);
+	$booking_name= mysqli_real_escape_string($con,$_POST['booking_name']);
+	$booking_mobile= mysqli_real_escape_string($con,$_POST['booking_mobile']);
+	$booking_passengernum= mysqli_real_escape_string($con,$_POST['booking_passengernum']);
+	$booking_pickuptime= mysqli_real_escape_string($con,$_POST['booking_pickuptime']);
+	$booking_pickupdate= mysqli_real_escape_string($con,$_POST['booking_pickupdate']);
+	$booking_pickupaddress= mysqli_real_escape_string($con,$_POST['booking_pickupaddress']);
+	$booking_dropoffaddress= mysqli_real_escape_string($con,$_POST['booking_dropoffaddress']);
+	$booking_ride_id= mysqli_real_escape_string($con,$_POST['booking_ride_id']);
+	$booking_numofcars= mysqli_real_escape_string($con,$_POST['booking_numofcars']);
 
-
-	$booking_time=  $_POST['booking_time'];
-	$booking_date=  $_POST['booking_date'];
-	$booking_name=  $_POST['booking_name'];
-	$booking_mobile=  $_POST['booking_mobile'];
-	$booking_email=  $_POST['booking_email'];
-	$booking_passengernum=  $_POST['booking_passengernum'];
-	$booking_pickuptime=  $_POST['booking_pickuptime'];
-	$booking_pickupdate=  $_POST['booking_pickupdate'];
-	$booking_pickupaddress=  $_POST['booking_pickupaddress'];
-	$booking_dropoffaddress=  $_POST['booking_dropoffaddress'];
-	$booking_ride_id=  $_POST['booking_ride_id'];
-	$booking_numofcars= $_POST['booking_numofcars'];
-	$available_cars=$_SESSION['available_cars'];
-	
-	$booking_cost=  $_POST['ride_cost']*$booking_numofcars;
+	 
+	$in="INSERT INTO booking(booking_time,booking_date,booking_name,booking_mobile,booking_passengernum,booking_pickuptime,booking_pickupdate,booking_pickupaddress,booking_dropoffaddress,booking_ride_id,booking_numofcars) VALUES ('$booking_time','$booking_date','$booking_name','$booking_mobile','$booking_passengernum','$booking_pickuptime','$booking_pickupdate','$booking_pickupaddress','$booking_dropoffaddress','$booking_ride_id','$booking_numofcars')";
+	//INSERT INTO `booking`(`booking_id`, `booking_datetime`, `booking_time`, `booking_date`, `booking_name`, `booking_mobile`, `booking_passengernum`, `booking_pickuptime`, `booking_pickupdate`, `booking_pickupaddress`, `booking_dropoffaddress`, `booking_ride_id`, `booking_numofcars`) VALUES ([value-1],[value-2],[value-3],[value-4],[value-5],[value-6],[value-7],[value-8],[value-9],[value-10],[value-11],[value-12],[value-13])
 
 
-	echo "available_cars ".$available_cars." \  booking_numofcars ".$booking_numofcars."booking_ride_id ".$booking_ride_id;
-
-	if ($booking_numofcars>$available_cars) {
-		echo "<script>alert('Cars not avaiable!!');</script>";
-		//echo "<script>window.location.assign('index.php')</script>";
-	} else {
-		$newavailable_cars= $available_cars-$booking_numofcars;
-		include 'mysqlconnect.php';
-		$i="UPDATE rides SET ride_count_status='$newavailable_cars' WHERE ride_id='$booking_ride_id' ";
-		if(mysqli_query($con,$i))
-		{ echo "<script type='text/javascript'>alert('Ride Updated!Car avaiable!!')</script>";
-		}
-		else {
-			echo "<script type='text/javascript'>alert('!!NOT Submitted  Successfully.! ! ! ERROR!!CAR NOT Updated.')</script>";
-		}
-		include 'mysqlconnect.php';
-
-		$in="INSERT INTO booking (booking_time,booking_date,booking_name,booking_mobile,booking_passengernum,booking_pickuptime,booking_pickupdate,booking_pickupaddress,booking_dropoffaddress,booking_ride_id,booking_numofcars,booking_cost) VALUES 
-								('$booking_time','$booking_date','$booking_name','$booking_mobile','$booking_passengernum','$booking_pickuptime','$booking_pickupdate','$booking_pickupaddress','$booking_dropoffaddress','$booking_ride_id','$booking_numofcars','$booking_cost')";
-			if(mysqli_query($con, $in))
-			{
-			echo "<script type='text/javascript'>alert('Your booking is successfully submitted. Now please wait for our agent to call back to confirm the booking. Thankyou!')</script>";
-			echo "<script>window.location.assign('thanksbooking.php')</script>";
-			}
-			else {
-				echo "<script type='text/javascript'>alert('!!NOT Submitted  Successfully.! ! ! ERROR!!Please submit again. Thankyou...')</script>";
-			}
-
-		
+	if(mysqli_query($con, $in))
+	{
+	echo "<script type='text/javascript'>alert('Your booking is successfully submitted. Now please wait for our agent to call back to confirm the booking. Thankyou!')</script>";
+	echo "<script>window.location.assign('thanksbooking.php')</script>";
 	}
-	
-		
-}
+	else {
+		echo "<script type='text/javascript'>alert('!!NOT Submitted  Successfully.! ! ! ERROR!!Please submit again. Thankyou...')</script>";
+	}
+
+}?>
+ <!-- <script type="text/javascript">alert('NOT inserted! ! ! Error!!')</script> -->
 
 
-
-?>
 
 			<div class="row m-1">
 				<div class="col-md-10 offset-md-1 border border-dark p-2" style="border-width: 20px !important;">
@@ -100,8 +73,12 @@ if(isset($_POST['submit'])){
 							            if ($num_rows > 0){
 							              while ($row = mysqli_fetch_assoc($result)){
 									?>
-								<div class="col-md-10 offset-md-2 col-sm-10 border border-dark" style="border-width: 6px !important;margin-left: 24px !important;
-                                                margin-bottom: 12px !important;">
+
+										<div class="col-md-10 offset-md-2 col-sm-10 border border-dark" 
+                                          style="border-width: 6px !important; 
+                                                margin-left: 24px !important;
+                                                margin-bottom: 12px !important;
+                                          ">
 						                        <div class="row " >
 						                          <div class="col-md-2 align-middle">
 						                            <img src="<?php echo $row['ride_image']; ?>" class="img-fluid" alt="" style="height: 100px !important; ">
@@ -112,15 +89,7 @@ if(isset($_POST['submit'])){
 						                                  <h4 class="text-info bg-dark p-1">Car Type : <?php echo $row['ride_type']; ?></h4>
 						                                  <h5 class="card-title">Car Name: <?php echo $row['ride_name']; ?></h5>
 						                                  <h6 class="">Passengers : <?php echo $row['ride_passengercap']; ?> max </h6>
-						                                  <h6  class="card-title ">Baggage : <?php  echo $row['ride_baggagecap']; ?> Kgs</h6>
-						                                  <h6  class="card-title ">No of Cars : <?php  echo $row['ride_count']; ?></h6>
-						                                  <?php 
-														  	$_SESSION['available_cars']=$row['ride_count_status']; 
-														  	$_SESSION['ride_cost']=$row['ride_cost']; 
-														  ?>
-						                                  <h6  class="card-title ">Available Cars : <?php echo $row['ride_count_status']; ?></h6>
-						                                  <h6  class="card-title ">Cost Cars : <?php echo $row['ride_cost']; ?></h6>
-						                                </div>
+						                                  <h6  class="card-title ">Baggage : <?php  echo $row['ride_baggagecap']; ?></h6>
 						                                </div>
 						                         </div>
 						                     </div>
@@ -129,6 +98,8 @@ if(isset($_POST['submit'])){
 											}
 										} 
 									?>
+
+							  		<!-- ------------- -->
 							  </div>
 						<form method="POST" enctype="multipart/form-data" class="needs-validation" novalidate>
 							<div class="form-row">
@@ -157,16 +128,7 @@ if(isset($_POST['submit'])){
 							      </div>
 							    </div>
 							  </div>
-							  <div class="form-row">
-							    <div class="col-md-7 mb-3">
-							      <label for="validationCustom01">Email </label>
-							      <input type="email" name="booking_email" class="form-control" id="validationCustom01" placeholder="email"  required>
-							      <div class="valid-feedback">
-							        Looks good!
-							      </div>
-							    </div>
-							    
-							  </div>
+
 							  <h4>Travel Details : </h4>
 							  <div class="form-row">
 
@@ -212,46 +174,15 @@ if(isset($_POST['submit'])){
 							  </div>
 
 							  <div class="form-row">
-							    <div class="col-md-3 mb-3">
+							    <div class="col-md-6 mb-3">
 							      <input type="hidden" name="booking_ride_id" class="form-control" value="<?php echo $booking_ride_id ?>" required>
-							      <label for="booking_numofcars">Number of Cars</label>
-							      <input type="text" name="booking_numofcars" class="form-control" id="booking_numofcars" placeholder="1" required>
-							      
-								  <?php $available_cars=$_SESSION['available_cars']; $ride_cost=$_SESSION['ride_cost']; ?>
-								  <input type="hidden" name="ride_cost" id="ride_cost" value="<?php echo $ride_cost;  ?>">
-							      <input type="hidden" name="available_cars=" id="available_cars" value="<?php echo $_SESSION['available_cars'];?>">
-							      <div class="valid-feedback">
-							        Looks good!
-							      </div>
-							    </div>
-								<?php 
-
-								?>
-								
-								<div class="col-md-5 mb-3">
-									<input type="button" value="Calcutate Cost" class="btn btn-lg btn-outline-primary" onclick="rideCost()">
-							      	Cost for ride :<b class="h2 text-danger" id="booking_cost" > </b> 
+							      <label for="validationCustom01">Number of Cars</label>
+							      <input type="text" name="booking_numofcars" class="form-control" id="validationCustom01" placeholder="1" required>
 							      <div class="valid-feedback">
 							        Looks good!
 							      </div>
 							    </div>
 							</div>
-							<script>
-									function rideCost(){
-										booking_numofcars = document.getElementById("booking_numofcars").value;
-										ride_cost = document.getElementById("ride_cost").value;
-										available_cars = document.getElementById("available_cars").value;
-										//alert("available_cars"+ available_cars +"  booking_numofcars"+booking_numofcars + " ride_cost "+ride_cost);
-										if(booking_numofcars > available_cars){
-											alert('Cars not avaiable!! Please book available cars only.');
-
-										}else{
-											document.getElementById("booking_cost").innerHTML = booking_numofcars*ride_cost+" Tk";
-
-										}
-
-									}
-								</script>
 
 							<input type="submit" value="Submit" class="text-info btn btn-dark" name="submit">
 						</form>
