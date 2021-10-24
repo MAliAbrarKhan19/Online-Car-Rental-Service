@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Oct 24, 2021 at 07:14 AM
+-- Generation Time: Oct 24, 2021 at 10:29 PM
 -- Server version: 10.4.19-MariaDB
 -- PHP Version: 8.0.7
 
@@ -103,13 +103,26 @@ CREATE TABLE `rides` (
 --
 
 INSERT INTO `rides` (`ride_id`, `ride_type`, `ride_name`, `ride_image`, `ride_passengercap`, `ride_baggagecap`, `ride_count`, `ride_count_status`, `ride_cost`) VALUES
-(4, 'Four Wheeler', 'Toyota primo', './img/toyota_primo.jpg', 6, 8, 6, 6, '1000'),
-(3, 'Four Wheeler', 'Toyota Coralla', './img/ex_corolla.jpg', 4, 6, 8, 7, '2000'),
-(5, 'Eight wheels', 'Hondai Bus', './img/20seatbus.jpg', 20, 100, 4, 4, '10000'),
-(6, 'Eight wheels', 'Bus Large', './img/40seatbus.jpg', 40, 230, 3, 2, '12000'),
-(7, 'Four Wheeler', 'Scorpio Jeep/ SUV', './img/jeep.jpg', 8, 20, 5, 3, '3000'),
-(8, 'Three Wheeler', 'Auto Rickshaw-Battery ', './img/autorikshaw.jpg', 5, 6, 20, 10, '800'),
-(9, 'Three Wheeler', 'Auto Rickshaw-Battery 2p', './img/autorikshaw2.jpg', 2, 3, 30, 30, '900');
+(4, 'Four Wheeler', 'Toyota primo', './img/toyota_primo.jpg', 6, 8, 600, 600, '1000'),
+(3, 'Four Wheeler', 'Toyota Coralla', './img/ex_corolla.jpg', 4, 6, 800, 777, '2000'),
+(5, 'Eight wheels', 'Hondai Bus', './img/20seatbus.jpg', 20, 100, 400, 400, '10000'),
+(6, 'Eight wheels', 'Bus Large', './img/40seatbus.jpg', 40, 230, 300, 200, '12000'),
+(7, 'Four Wheeler', 'Scorpio Jeep/ SUV', './img/jeep.jpg', 8, 20, 500, 300, '3000'),
+(8, 'Three Wheeler', 'Auto Rickshaw-Battery ', './img/autorikshaw.jpg', 5, 6, 220, 208, '800'),
+(9, 'Three Wheeler', 'Auto Rickshaw-Battery 2p', './img/autorikshaw2.jpg', 2, 3, 330, 328, '900');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user`
+--
+
+CREATE TABLE `user` (
+  `id` int(100) NOT NULL,
+  `username` varchar(255) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `password` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Indexes for dumped tables

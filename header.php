@@ -53,13 +53,12 @@
                         <a class="nav-link" href="home.php">Home <span class="sr-only">(current)</span></a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link" href="index.php#about">About us</a>
+                        <a class="nav-link" href="home.php#about">About us</a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link" href="index.php#cars">Our cars</a>
+                        <a class="nav-link" href="home.php#cars">Our cars</a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link" href="index.php#quote">Get-a-Quotation</a>
                       </li>
                       <li class="nav-item">
                         
@@ -68,6 +67,12 @@
                     
                     <span class="navbar-text " >
                       Get Your Ride Online! <a class="nav-link" href="tel:01700 888888">Call:01700 888888</a>
+                      <?php if (!empty($_SESSION['username'])) {
+                                echo "User Name: ".$_SESSION['username'];
+                              }else {
+                                echo "PLZ <a href='login.php' >Log in </a> ";
+                              } 
+                      ?>
                     </span>
                   </div>
             </nav>

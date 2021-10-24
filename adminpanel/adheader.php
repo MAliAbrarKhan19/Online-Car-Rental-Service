@@ -80,9 +80,9 @@ date_default_timezone_set("ASIA/DHAKA");
                       Get Your Ride Online! <a class="nav-link" href="tel:01700 888888">Call:01700 888888</a>
                     </span>
                     <span class="navbar-text ">
-                      Admin Name: <a href="#"><?php 
+                       <a href="#"><?php 
                               if (!empty($_SESSION['username'])) {
-                                echo " ".$_SESSION['username'];
+                                echo "Admin Name: ".$_SESSION['username'];
                               }else {
                                 echo "PLZ <a href='login.php' >Log in </a> ";
                               }
