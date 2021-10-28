@@ -84,7 +84,7 @@ date_default_timezone_set("ASIA/DHAKA");
                               if (!empty($_SESSION['username'])) {
                                 echo "Admin Name: ".$_SESSION['username'];
                               }else {
-                                echo "PLZ <a href='login.php' >Log in </a> ";
+                                echo " <a href='login.php' >Log in </a> ";
                               }
 
                        ?></a>

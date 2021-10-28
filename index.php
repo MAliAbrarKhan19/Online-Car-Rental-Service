@@ -1,4 +1,5 @@
 <?php session_start();
+error_reporting();
 
  ?>
 <!-- Header          ========= -->
@@ -36,12 +37,10 @@ include 'mysqlconnect.php';
         echo "<script type='text/javascript'>alert('NOT inserted! ! ! Error!!')</script>";
       }
 
-			// $_SESSION['username'] = $username;
-			// $_SESSION['success'] = "You are now logged in";
-			//header('location: admin.php');
+		
 		}
 
-	}
+	
 
 
   
@@ -67,7 +66,7 @@ if (isset($_POST['login_user'])) {
     if (mysqli_num_rows($results) == 1) {
       $_SESSION['username'] = $username;
       $_SESSION['success'] = "You are now logged in";
-      header('location:admin.php');
+      header('location:home.php');
     }else {
       array_push($errors, "Wrong username/password combination");
     }

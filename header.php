@@ -1,6 +1,16 @@
 <?php   date_default_timezone_set("ASIA/DHAKA");
   $date = date("D, d-M-Y  ");
   $time= date("h:i a");
+
+
+
+  if (isset($_GET['logout'])) {
+    session_destroy();
+    unset($_SESSION['username']);
+    header("location: login.php");
+  }
+
+
    ?>
 <!doctype html>
 <html lang="en">
@@ -68,9 +78,9 @@
                     <span class="navbar-text " >
                       Get Your Ride Online! <a class="nav-link" href="tel:01700 888888">Call:01700 888888</a>
                       <?php if (!empty($_SESSION['username'])) {
-                                echo "User Name: ".$_SESSION['username'];
+                                echo "User Name: ".$_SESSION['username']."<form method='POST' action='multipart'> <input type='submit' name='logout' value='Log out' class='btn btn-outline-info'></form>";
                               }else {
-                                echo "PLZ <a href='login.php' >Log in </a> ";
+                                echo "<a class='btn btn-outline-info' href='index.php' >Log in </a> ";
                               } 
                       ?>
                     </span>
@@ -81,12 +91,6 @@
 
 <!--  NAV Menu Bar -->
 
-<!-- <div class="row">
-  <div class="col">
-    <br>
-  </div>
-</div>
-    -->
 
 
     <div class="row" style="margin-bottom: 30px !important;">
