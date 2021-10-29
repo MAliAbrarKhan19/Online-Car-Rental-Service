@@ -4,10 +4,10 @@
 
 
 
-  if (isset($_GET['logout'])) {
+  if (isset($_POST['logout'])) {
     session_destroy();
     unset($_SESSION['username']);
-    header("location: login.php");
+    header("location: index.php");
   }
 
 
@@ -68,21 +68,30 @@
                       <li class="nav-item">
                         <a class="nav-link" href="home.php#cars">Our cars</a>
                       </li>
-                      <li class="nav-item">
-                      </li>
+                      <?php if (!empty($_SESSION['username'])) {
+                                echo "
+                                <li class='nav-item'>
+                                  <i class='nav-link text-info'> User Name: ".$_SESSION['username'].
+                                "</i></li>".
+                                "<li class='nav-item'>
+                                  <form method='POST'> <input type='submit' name='logout' value='Log out' class='btn btn-outline-info'></form>
+                                </li>";
+                              }else {
+                                echo "<li class='nav-item'>
+                                      <a class='nav-link' href='dashboard.php'>Log in</a>
+                                       </li> ";
+                              } 
+                      ?>
+                      
+                      
                       <li class="nav-item">
                         
                       </li>
                     </ul>
                     
                     <span class="navbar-text " >
-                      Get Your Ride Online! <a class="nav-link" href="tel:01700 888888">Call:01700 888888</a>
-                      <?php if (!empty($_SESSION['username'])) {
-                                echo "User Name: ".$_SESSION['username']."<form method='POST' action='multipart'> <input type='submit' name='logout' value='Log out' class='btn btn-outline-info'></form>";
-                              }else {
-                                echo "<a class='btn btn-outline-info' href='index.php' >Log in </a> ";
-                              } 
-                      ?>
+                      Get Your Ride Online! <a class="navbar-text" href="tel:01700 888888">Call:01700 888888</a>
+                      
                     </span>
                   </div>
             </nav>

@@ -1,6 +1,7 @@
 <?php session_start();
 error_reporting();
 
+
  ?>
 <!-- Header          ========= -->
 <?php include 'header.php'; ?>
@@ -8,73 +9,66 @@ error_reporting();
 
 <?php 
 // connect to database
-include 'mysqlconnect.php';
 	
 
 	// REGISTER USER
-	if (isset($_POST['reg_user'])) {
+	if (isset($_POST['reg_user'])){
 		// receive all input values from the form
-		$username = mysqli_real_escape_string($con, $_POST['username']);
-		$email = mysqli_real_escape_string($con, $_POST['email']);
-		$password_1 = mysqli_real_escape_string($con, $_POST['password_1']);
-		$password_2 = mysqli_real_escape_string($con, $_POST['password_2']);
-
+		$username =$_POST['username'];
+		$email = $_POST['email'];
+		$password1 =$_POST['password1'];
+		$password2 =$_POST['password2'];
 		
-		if ($password_1 != $password_2) {
-			array_push($errors, "The two passwords do not match");
-		}
+		// if ($password_1!=$password_2) {
+		// 	echo "The two passwords do not match";
 
-		// register user if there are no errors in the form
+		// }
+    include 'mysqlconnect.php';
+			$password = $password1;//encrypt the password before saving in the database
+      echo " pa ".$password." !!!!!!us ".$username;
 		
-			$password = md5($password_1);//encrypt the password before saving in the database
-			$query = "INSERT INTO user (username, email, password) 
-					  VALUES('$username', '$email', '$password')";
-			if(mysqli_query($con, $query))
+			// $query = "INSERT INTO 'user' ('username', 'email', 'upass') VALUES ('$username','$email','$password')";
+			$i="insert into user (username,email,upass)values('$username','$email','$password')";
+      if(mysqli_query($con, $i))
       {
-      echo "<script type='text/javascript'>alert('inserted successfully..!')</script>";
+      echo "";
+      $_SESSION['username'] = $username;
+      echo "<script>alert('inserted successfully..!!')</script>";  
+
+      header('home.php');
       }
       else {
-        echo "<script type='text/javascript'>alert('NOT inserted! ! ! Error!!')</script>";
-      }
+        echo "<script>alert('NOT inserted ..!!')</script>";  
 
+      }
 		
 		}
 
-	
 
-
+include 'mysqlconnect.php';
+ 
+ if(isset($_POST['login_user']))  
+{  
+    $username=$_POST['username'];  
+    $password=$_POST['password'];  
+    
+    $check_user="SELECT*FROM user WHERE username='$username' AND upass='$password'";  
+    $run=mysqli_query($con,$check_user);  
   
-// connect to database
-include './mysqlconnect.php';
-// LOGIN USER
-if (isset($_POST['login_user'])) {
-  $username = mysqli_real_escape_string($con, $_POST['username']);
-  $password = mysqli_real_escape_string($con, $_POST['password']);
-
-  if (empty($username)) {
-    array_push($errors, "Username is required");
-  }
-  if (empty($password)) {
-    array_push($errors, "Password is required");
-  }
-
-  if (count($errors) == 0) {
-    $password = md5($password);
-    $query = "SELECT * FROM user WHERE username='$username' AND password='$password'";
-    $results = mysqli_query($con, $query);
-
-    if (mysqli_num_rows($results) == 1) {
-      $_SESSION['username'] = $username;
-      $_SESSION['success'] = "You are now logged in";
-      header('location:home.php');
-    }else {
-      array_push($errors, "Wrong username/password combination");
-    }
-  }
-}
-
-
- ?>
+    if(mysqli_num_rows($run))  
+    {  
+        echo "<script>window.open('home.php','_self')</script>";  
+  
+         $_SESSION['username'] = $username;
+      $_SESSION['success'] = "You are now logged in";//here session is used and value of $user_email store in $_SESSION.  
+  
+    }  
+    else  
+    {  
+      echo "<script>alert('Email or password is incorrect!')</script>";  
+    }  
+}  
+?>  
 
 <!--=============================================Body=============================================  -->
 
@@ -99,16 +93,16 @@ if (isset($_POST['login_user'])) {
               <?php //include('errors.php'); ?>
               
               
-                <div class="input-group p-1">
+                
                   <label>User Name  </label>
                   <input type="text" class="form-control m-1" name="username" >
-                </div>
-                <div class="input-group p-1">
+ 
+                
                   <label>Password  </label>
                   <input type="password" class="form-control m-1" name="password">
-                </div>
+ 
                 <div class="input-group m-1">
-                  <button type="submit" class="btn btn-dark text-white" name="login_user">Login</button>
+                  <input type="submit" class="btn btn-dark text-white" name="login_user" value="Login">
                 </div>
 
               </form>
@@ -118,32 +112,32 @@ if (isset($_POST['login_user'])) {
       <!-- login -->
       <div class="col-md-6 p-1">
         <div class="row bg-dark m-1 text-center">
-           <h2 class="text-white text-center">Register</h2>
+           <h2 class="text-white text-center" id="reg">Register</h2>
         </div>
 
-          <form method="post" action="index.php" class=" p-2 m-1">
+          <form method="POST" enctype="multipart/form-data"  class=" p-2 m-1">
 
-              <?php //include('errors.php'); ?>
 
-              <div class="input-group">
+              
                 <label>User Name </label>
                 <input type="text" name="username" class="form-control" value="<?php echo $username; ?>">
-              </div>
-              <div class="input-group">
+ 
+              
                 <label>Email </label>
                 <input type="email" name="email" class="form-control" value="<?php echo $email; ?>">
-              </div>
-              <div class="input-group">
+ 
+              
                 <label>Password </label>
-                <input type="password" class="form-control" name="password_1">
-              </div>
-              <div class="input-group">
+                <input type="password" class="form-control" name="password1">
+ 
+              
                 <label>Confirm password </label>
-                <input type="password" class="form-control" name="password_2">
-              </div>
-              <div class="input-group">
-                <button type="submit" class="btn btn-dark" name="reg_user"> Register </button>
-              </div>
+                <input type="password" class="form-control" name="password2">
+ 
+              
+                <input type="submit" class="btn btn-dark" name="reg_user" value="Register">
+               
+ 
           </form>
 
 

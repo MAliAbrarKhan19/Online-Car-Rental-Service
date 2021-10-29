@@ -71,9 +71,9 @@
                                               Display
 ====================================================================================================================
 -->
-<div class="col-md-10 offset-md-1 p-1" id="cars">
+<div class="col-md-10 offset-md-1 p-1 border " id="cars">
   <div class="row bg-dark m-1" >
-        <h2 class="text-white">
+        <h2 class="text-white text-center">
           Our Cars
         </h2>
     </div>
@@ -92,16 +92,12 @@
           ?>
 
 
-            <div class="col-md-10 offset-md-1 col-sm-10  border border-dark" 
-                                          style="border-width: 6px !important; 
-                                                margin-left: 24px !important;
-                                                margin-bottom: 12px !important;
-                                          ">
+            <div class="col-md-10 offset-md-1 border border-dark mb-2"  style=" overflow:hidden; ">
                 <!--      cars        -->
                       
-                        <div class="row " >
+                        <div class="row" >
                           <div class="col-md-5">
-                            <img src="<?php echo $row['ride_image']; ?>" class="image-thumbnail" alt="" style="height: 200px !important; width: 100% !important;">
+                            <img src="<?php echo $row['ride_image']; ?>" class="image-fluid" alt="" style="height: 200px !important; width: 100% !important;">
                           </div>
 
                             <div class="col-md-7 text-left">
@@ -114,23 +110,18 @@
                                 <h6  class="card-title ">No of Cars : <?php  echo $row['ride_count']; ?></h6>
                                 <h6  class="card-title ">Available Cars : <?php  echo $row['ride_count_status']; ?></h6>
                                 <h6  class="card-title ">Cost Cars : <?php echo $row['ride_cost']; ?></h6>
+                                
+                                <a href ="booking.php?action=booking&id=<?php echo $row['ride_id']; ?>" class="btn btn-dark btn-lg btn-block text-white">BOOK NOW / এখনই বুক করুন</a>
 
-                                    </div>
-                                <!-- Submit Button -->
-                                  <!-- <input type="submit" name="booking" action="booking.php?action=booking&id=<?php echo $row['ride_type']; ?>" class="btn btn-dark btn-lg btn-block text-white" width="60%" value="BOOK NOW / এখনই বুক করুন " style="">  -->
-
-                              <a href ="booking.php?action=booking&id=<?php echo $row['ride_id']; ?>" class="btn btn-dark btn-lg btn-block text-white">BOOK NOW / এখনই বুক করুন</a>
-
-                                 
                             </div>
+                        </div>
                            <!--  <div class="col-md-3 text-left">
                                   
                             </div> -->
                           
-                        </div>
+            </div>
                       
                     <!--      cars      -->
-            </div>
           <?php
                 
                 };

@@ -1,7 +1,7 @@
 <?php 
 		$con= mysqli_connect("localhost","root","root","garikoi");
 
-
+// echo"dB OK!!!!!!!!!!!!!!!!!!!!!";
 		 // $query= "SELECT*FROM cars ORDER BY sl ASC";
    //          $result= mysqli_query($con, $query);
    //          $num_rows=mysqli_num_rows($result);
