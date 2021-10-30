@@ -9,54 +9,72 @@ include 'mysqlconnect.php';
 <!-- Header -->
 <div class="row bg-dark">
 	<div class="col">
-		<div>
+		
 			<h1 class="text-info">Customer Dashboard</h1>
 			<hr class="border border-light">
-		</div>
+		
 	</div>
 </div>
 <div class="row">
-	<div class="col-md-6">
+	<div class="col-md-10 offset-md-1">
 		<h3>Your bookings</h3>
+
+
+
+<!-- ======================================================== -->
+
+<?php 
+
+include 'mysqlconnect.php';
+$query= "SELECT*FROM booking ORDER BY 'booking_id' DESC";
+//ride_type,ride_name,ride_image,ride_passengercap,ride_baggagecap
+$result= mysqli_query($con, $query);
+$num_rows=mysqli_num_rows($result);
+if ($num_rows > 0){
+  while ($row = mysqli_fetch_assoc($result)){
+
+?>
+<div class="row shadow-lg bg-secondary text-light border border-4 border-info rounded-3 m-3">
+	<div class="col ">
+<!-- =========================================== -->
+      <div class="row">
+         <div class="col">
+           <h3>Booking serial ID: <?php echo $row['booking_slno']; ?></h3>
+           <h6>Date/Time : <?php echo $row['booking_date']; ?></h6>
+           <h6>Name : <?php echo $row['booking_name']; ?></h6>
+           <h6>Mobile : <?php echo $row['booking_mobile']; ?></h6>
+           <h6>Email : <?php echo $row['booking_email']; ?></h6>
+           <hr>
+           <h6>Ride ID : <?php echo $row['booking_ride_id']; ?></h6>
+           <h6>Number of Cars : <?php echo $row['booking_numofcars']; ?></h6>
+           <h6>Booked for Days : <?php echo $row['booking_days']; ?></h6>
+           <h6>Cost : <?php echo $row['booking_cost']; ?> TK </h6>
+
+         </div>
+         <div class="col">
+            <br>
+           <h6>Pickup Time : <?php echo $row['booking_pickuptime']; ?></h6>
+           <h6>Pickup Date : <?php echo $row['booking_pickupdate']; ?></h6>
+           <h6>Pickup Address : <?php echo $row['booking_pickupaddress']; ?></h6>
+           <h6>Dropoff Address : <?php echo $row['booking_dropoffaddress']; ?></h6>
+           <h6>Paid from Mobile : <?php echo $row['booking_bkashno']; ?></h6>
+           <form action="" method="POST">
+             <input class="btn btn-info" type="submit" name="booking_status" value="Update Status to Done"  >
+             <input class="btn btn-danger" type="submit" name="booking_status" value="Update Status to Cancelled"  >
+           </form>
+         </div>
+      </div>
+<!-- =========================================== -->
 	</div>
 </div>
-<div class="row">
-	<div class="col">
-<!-- =========================================== -->
-<div class="accordion accordion-flush" id="accordionFlushExample">
-  <div class="accordion-item">
-    <h2 class="accordion-header" id="flush-headingOne">
-      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-        Accordion Item #1
-      </button>
-    </h2>
-    <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
-      <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the first item's accordion body.</div>
-    </div>
+
+
+<?php 
+};
+}; ?>
+<!-- ======================================================== -->
+
   </div>
-  <div class="accordion-item">
-    <h2 class="accordion-header" id="flush-headingTwo">
-      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
-        Accordion Item #2
-      </button>
-    </h2>
-    <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
-      <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the second item's accordion body. Let's imagine this being filled with some actual content.</div>
-    </div>
-  </div>
-  <div class="accordion-item">
-    <h2 class="accordion-header" id="flush-headingThree">
-      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
-        Accordion Item #3
-      </button>
-    </h2>
-    <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
-      <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the third item's accordion body. Nothing more exciting happening here in terms of content, but just filling up the space to make it look, at least at first glance, a bit more representative of how this would look in a real-world application.</div>
-    </div>
-  </div>
-</div>
-<!-- =========================================== -->
-	</div>
 </div>
 
 <div class="row"></div>

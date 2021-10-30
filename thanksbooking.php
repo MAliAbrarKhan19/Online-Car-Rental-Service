@@ -29,11 +29,11 @@ include 'mysqlconnect.php';
 					<div class="border border-dark m-1 p-4 align-middle">
 
 						<h2 class="text-info m-4 p-6 align-middle">
-							Thanks For Your time. Please Pay your Booking Charge by Bkash on the below number. 
+							Thanks For Your time. Please keep patience we will be just on time. 
 						</h2>
-						<h3 class="text-danger">01700123456</h3>
+						
 						<h2 class="text-info m-4 p-6 align-middle">
-							ধন্যবাদ আপনার সময়ের জন্য। 
+							ধন্যবাদ আপনার সময়ের জন্য। !!!!
 						</h2>
 
 							  
