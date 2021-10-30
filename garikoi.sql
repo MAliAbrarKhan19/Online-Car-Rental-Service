@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Oct 24, 2021 at 10:29 PM
+-- Generation Time: Oct 29, 2021 at 03:54 PM
 -- Server version: 10.4.19-MariaDB
 -- PHP Version: 8.0.7
 
@@ -51,34 +51,32 @@ INSERT INTO `admin` (`id`, `username`, `email`, `password`) VALUES
 
 CREATE TABLE `booking` (
   `booking_id` int(100) NOT NULL,
-  `booking_datetime` timestamp(6) NULL DEFAULT current_timestamp(6) ON UPDATE current_timestamp(6),
+  `booking_slno` varchar(255) DEFAULT NULL,
   `booking_time` varchar(255) DEFAULT NULL,
   `booking_date` varchar(255) DEFAULT NULL,
   `booking_name` varchar(255) DEFAULT NULL,
   `booking_mobile` varchar(255) DEFAULT NULL,
   `booking_email` varchar(255) DEFAULT NULL,
-  `booking_passengernum` int(100) DEFAULT NULL,
+  `booking_passengernum` varchar(255) DEFAULT NULL,
   `booking_pickuptime` varchar(255) DEFAULT NULL,
   `booking_pickupdate` varchar(255) DEFAULT NULL,
   `booking_pickupaddress` varchar(255) DEFAULT NULL,
   `booking_dropoffaddress` varchar(255) DEFAULT NULL,
-  `booking_ride_id` int(100) DEFAULT NULL,
+  `booking_ride_id` varchar(255) DEFAULT NULL,
   `booking_numofcars` int(100) DEFAULT NULL,
-  `booking_cost` int(200) NOT NULL,
-  `booking_status` varchar(255) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `booking_bkashno` varchar(255) DEFAULT NULL,
+  `booking_bkashtxid` varchar(255) DEFAULT NULL,
+  `username` varchar(255) DEFAULT NULL,
+  `booking_cost` int(200) DEFAULT NULL,
+  `booking_days` int(200) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `booking`
 --
 
-INSERT INTO `booking` (`booking_id`, `booking_datetime`, `booking_time`, `booking_date`, `booking_name`, `booking_mobile`, `booking_email`, `booking_passengernum`, `booking_pickuptime`, `booking_pickupdate`, `booking_pickupaddress`, `booking_dropoffaddress`, `booking_ride_id`, `booking_numofcars`, `booking_cost`, `booking_status`) VALUES
-(1, NULL, '10:04 am', 'Wed, 09-Sep-2020  ', 'ratul', '01889955766', NULL, 6, '13:05', '2020-09-09', '33, strt', 'daulatpur', 4, 1, 0, 'yet not'),
-(2, NULL, '10:15 am', 'Wed, 09-Sep-2020  ', 'Mr hassan', '01889945545', NULL, 30, '14:15', '2020-09-16', 'Shib Bari Mor, Khulna', 'Mogla EPZ', 6, 1, 1200, 'yet not'),
-(3, NULL, '10:15 am', 'Wed, 09-Sep-2020  ', 'Mr hassan', '01889945545', NULL, 30, '14:15', '2020-09-16', 'Shib Bari Mor, Khulna', 'Mogla EPZ', 6, 1, 0, 'yet not'),
-(4, NULL, '10:17 am', 'Wed, 09-Sep-2020  ', 'kaes', '01812121212', NULL, 5, '11:17', '2020-09-28', 'Shib Bari Mor, Khulna', 'jeshore', 7, 1, 1200, 'yet not'),
-(5, NULL, '10:24 am', 'Wed, 09-Sep-2020  ', 'ratul', '01889955766', NULL, 4, '00:24', '2020-09-16', 'Shib Bari Mor, Khulna', 'daulatpur', 3, 1, 1200, 'no'),
-(6, NULL, '10:24 am', 'Wed, 09-Sep-2020  ', 'ratul', '01889955766', NULL, 4, '00:24', '2020-09-16', 'Shib Bari Mor, Khulna', 'daulatpur', 3, 1, 1000, 'on the way');
+INSERT INTO `booking` (`booking_id`, `booking_slno`, `booking_time`, `booking_date`, `booking_name`, `booking_mobile`, `booking_email`, `booking_passengernum`, `booking_pickuptime`, `booking_pickupdate`, `booking_pickupaddress`, `booking_dropoffaddress`, `booking_ride_id`, `booking_numofcars`, `booking_bkashno`, `booking_bkashtxid`, `username`, `booking_cost`, `booking_days`) VALUES
+(1, NULL, '10:20 am', 'Fri, 29-Oct-2021  ', 'M. Ali Abrar Khan', '', NULL, '', '', '', '38, Sultan Ahmed Road, Moulovi Para,1st floor, , Khulna Sadar, Khulna , Bangladesh', '', '5', 2, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -95,7 +93,7 @@ CREATE TABLE `rides` (
   `ride_baggagecap` int(100) DEFAULT NULL,
   `ride_count` int(100) DEFAULT NULL,
   `ride_count_status` int(100) DEFAULT NULL,
-  `ride_cost` varchar(255) DEFAULT NULL
+  `ride_cost` int(100) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
@@ -103,13 +101,13 @@ CREATE TABLE `rides` (
 --
 
 INSERT INTO `rides` (`ride_id`, `ride_type`, `ride_name`, `ride_image`, `ride_passengercap`, `ride_baggagecap`, `ride_count`, `ride_count_status`, `ride_cost`) VALUES
-(4, 'Four Wheeler', 'Toyota primo', './img/toyota_primo.jpg', 6, 8, 600, 600, '1000'),
-(3, 'Four Wheeler', 'Toyota Coralla', './img/ex_corolla.jpg', 4, 6, 800, 777, '2000'),
-(5, 'Eight wheels', 'Hondai Bus', './img/20seatbus.jpg', 20, 100, 400, 400, '10000'),
-(6, 'Eight wheels', 'Bus Large', './img/40seatbus.jpg', 40, 230, 300, 200, '12000'),
-(7, 'Four Wheeler', 'Scorpio Jeep/ SUV', './img/jeep.jpg', 8, 20, 500, 300, '3000'),
-(8, 'Three Wheeler', 'Auto Rickshaw-Battery ', './img/autorikshaw.jpg', 5, 6, 220, 208, '800'),
-(9, 'Three Wheeler', 'Auto Rickshaw-Battery 2p', './img/autorikshaw2.jpg', 2, 3, 330, 328, '900');
+(4, 'Four Wheeler', 'Toyota primo', './img/toyota_primo.jpg', 6, 8, 600, 600, 1000),
+(3, 'Four Wheeler', 'Toyota Coralla', './img/ex_corolla.jpg', 4, 6, 800, 777, 2000),
+(5, 'Eight wheels', 'Hondai Bus', './img/20seatbus.jpg', 20, 100, 400, 400, 10000),
+(6, 'Eight wheels', 'Bus Large', './img/40seatbus.jpg', 40, 230, 300, 200, 12000),
+(7, 'Four Wheeler', 'Scorpio Jeep/ SUV', './img/jeep.jpg', 8, 20, 500, 300, 3000),
+(8, 'Three Wheeler', 'Auto Rickshaw-Battery ', './img/autorikshaw.jpg', 5, 6, 220, 208, 800),
+(9, 'Three Wheeler', 'Auto Rickshaw-Battery 2p', './img/autorikshaw2.jpg', 2, 3, 330, 328, 900);
 
 -- --------------------------------------------------------
 
@@ -121,8 +119,15 @@ CREATE TABLE `user` (
   `id` int(100) NOT NULL,
   `username` varchar(255) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
-  `password` varchar(255) DEFAULT NULL
+  `upass` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`id`, `username`, `email`, `upass`) VALUES
+(3, 'abrar', 'ab@gmail.com', '1234');
 
 --
 -- Indexes for dumped tables
@@ -138,14 +143,19 @@ ALTER TABLE `admin`
 -- Indexes for table `booking`
 --
 ALTER TABLE `booking`
-  ADD PRIMARY KEY (`booking_id`),
-  ADD KEY `booking_ride_id` (`booking_ride_id`);
+  ADD PRIMARY KEY (`booking_id`);
 
 --
 -- Indexes for table `rides`
 --
 ALTER TABLE `rides`
   ADD PRIMARY KEY (`ride_id`);
+
+--
+-- Indexes for table `user`
+--
+ALTER TABLE `user`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -161,13 +171,19 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `booking`
 --
 ALTER TABLE `booking`
-  MODIFY `booking_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `booking_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `rides`
 --
 ALTER TABLE `rides`
   MODIFY `ride_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT for table `user`
+--
+ALTER TABLE `user`
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

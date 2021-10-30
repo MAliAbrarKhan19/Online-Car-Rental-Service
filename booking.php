@@ -1,7 +1,7 @@
 <?php  session_start();
 //Connect the Dbase
 include 'mysqlconnect.php';
-error_reporting();
+error_reporting(E_ALL);
 ?>
 
 <!-- Header -->
@@ -23,46 +23,48 @@ $available_cars=0;
 if(isset($_POST['submit']))
 {	
 
-	// $booking_time=  $_POST['booking_time'];
-	// $booking_date=  $_POST['booking_date'];
-	// $booking_name=  $_POST['booking_name'];
-	// $booking_mobile=  $_POST['booking_mobile'];
-	// $booking_passengernum=  $_POST['booking_passengernum'];
-	// $booking_pickuptime=  $_POST['booking_pickuptime'];
-	// $booking_pickupdate=  $_POST['booking_pickupdate'];
-	// $booking_pickupaddress=  $_POST['booking_pickupaddress'];
-	// $booking_dropoffaddress=  $_POST['booking_dropoffaddress'];
+	
+	$booking_passengernum= $_POST['booking_passengernum'];
+	$booking_pickuptime=  $_POST['booking_pickuptime'];
+	$booking_pickupdate=  $_POST['booking_pickupdate'];
+	$booking_pickupaddress=  $_POST['booking_pickupaddress'];
+	$booking_dropoffaddress=$_POST['booking_dropoffaddress'];
 	$booking_ride_id=  $_POST['booking_ride_id'];
 	$booking_numofcars=  $_POST['booking_numofcars'];
 	$available_cars=$_POST['available_cars'];
 	$ride_cost=$_POST['ride_cost'];
+	$booking_days=$_POST['booking_days'];
 
-	//echo "available_cars :".$available_cars."booking_numofcars :".$booking_numofcars."ride_cost ".$ride_cost;
+	$booking_cost=$ride_cost*$booking_numofcars*$booking_days;
+
+	//echo "booking_cost:".$booking_cost." available_cars :".$available_cars."booking_numofcars :".$booking_numofcars."ride_cost ".$ride_cost."booking_days".$booking_days;
 
 	
 	
 	//check car avilable
 	if($booking_numofcars> $available_cars){
-		echo"==========================================================================================================================";
-		header('location: index.php');
+		
 		echo "<script type='text/javascript'>alert('Too many CArs. Please order less cars NO ! ! ! Error!!');
 		window.location.replace('home.php#cars');</script>";
 		
-	}else{
-	//assign to session
-	$_SESSION['booking_passengernum']=$booking_passengernum ;
-	$_SESSION['booking_pickuptime']=$booking_pickuptime ;
-	$_SESSION['booking_pickupaddress']=$booking_pickupaddress ;
-	$_SESSION['booking_dropoffaddress']=$booking_dropoffaddress ;
-	$_SESSION['booking_ride_id']=$booking_ride_id ;
-	$_SESSION['booking_ride_id']=$booking_ride_id ;
-	$_SESSION['booking_numofcars']=$booking_numofcars ;
-	$_SESSION['available_cars']=$available_cars ;
-	 $_SESSION['ride_cost']=$ride_cost ;
-	// header("location: .php");
-	echo "<script type='text/javascript'>alert('Done!');window.location.replace('bookingok.php');</script>";
+	}else if($booking_numofcars < $available_cars){
+		//assign to session
+		$_SESSION['booking_passengernum']=$booking_passengernum ;
+		$_SESSION['booking_pickuptime']=$booking_pickuptime ;
+		$_SESSION['booking_pickupdate']=$booking_pickupdate ;
+		$_SESSION['booking_pickupaddress']=$booking_pickupaddress ;
+		$_SESSION['booking_dropoffaddress']=$booking_dropoffaddress ;
+		$_SESSION['booking_ride_id']=$booking_ride_id ;
+		$_SESSION['booking_days']=$booking_days ;
+		$_SESSION['booking_numofcars']=$booking_numofcars ;
+		$_SESSION['available_cars']=$available_cars ;
+		$_SESSION['ride_cost']=$ride_cost ;
+		$_SESSION['booking_cost']=$booking_cost;
 
+		echo "<script type='text/javascript'>alert('Done!');
+		window.location.replace('bookingok.php');</script>";
 	}
+	
  		
 }
 
@@ -131,7 +133,7 @@ if(isset($_POST['submit']))
 
 							    <div class="col-md-4 mb-3">
 							      <label for="validationCustom01">Number of Passengers</label>
-							      <input type="text" name="booking_passengernum" class="form-control" id="validationCustom01" placeholder="Number of people to travel" required>
+							      <input type="number" name="booking_passengernum" class="form-control" id="validationCustom01" placeholder="Number of people to travel" required>
 							      <div class="valid-feedback">
 							        Looks good!
 							      </div>
@@ -174,15 +176,23 @@ if(isset($_POST['submit']))
 							    <div class="col-md-3 mb-3">
 							      <input type="hidden" name="booking_ride_id" class="form-control" value="<?php echo $booking_ride_id ?>" required>
 							      <label for="booking_numofcars">Number of Cars</label>
-							      <input type="number" name="booking_numofcars" class="form-control" id="booking_numofcars" placeholder="0" required>
+							      <input type="number" name="booking_numofcars" class="form-control" placeholder="0" required>
 							      <?php  $available_c=$_SESSION['available_cars'];?>
-							      <?php echo "available_cars ".$available_c;?>
+
+							      <?php echo "Available Number of Cars ".$available_c;?>
 							      <input type="hidden" name="available_cars" class="form-control" value="<?php echo $available_c; ?>" required>
-							      <input type="hidden" name="ride_cost" class="form-control" value="<?php echo $ride_cost; ?>" required>
+							      <input type="hidden" name="ride_cost" class="form-control" value="<?php echo $_SESSION['ride_cost']; ?>" required>
 								  <div class="valid-feedback">
 							        Looks good!
 								 </div>
 								</div>
+								<div class="col-md-6 mb-3">
+							      <label for="validationCustom01">Rent for days</label>
+							      <input type="number" name="booking_days" class="form-control" id="validationCustom01" placeholder="booking_days" required>
+							      <div class="valid-feedback">
+							        Looks good!
+							      </div>
+							    </div>
 							  </div>
 								<?php 
 

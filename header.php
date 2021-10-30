@@ -71,14 +71,17 @@
                       <?php if (!empty($_SESSION['username'])) {
                                 echo "
                                 <li class='nav-item'>
-                                  <i class='nav-link text-info'> User Name: ".$_SESSION['username'].
+                                <a class='nav-link' href='user_profile.php'>Dashboard</a>".
+                                "</i></li>".
+                                "<li class='nav-item'>
+                                  <i class='nav-link text-info'> User:".$_SESSION['username'].
                                 "</i></li>".
                                 "<li class='nav-item'>
                                   <form method='POST'> <input type='submit' name='logout' value='Log out' class='btn btn-outline-info'></form>
                                 </li>";
                               }else {
                                 echo "<li class='nav-item'>
-                                      <a class='nav-link' href='dashboard.php'>Log in</a>
+                                      <a class='nav-link' href='index.php'>Log in</a>
                                        </li> ";
                               } 
                       ?>
