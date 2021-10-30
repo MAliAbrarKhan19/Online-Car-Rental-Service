@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Oct 29, 2021 at 03:54 PM
+-- Generation Time: Oct 30, 2021 at 06:02 AM
 -- Server version: 10.4.19-MariaDB
 -- PHP Version: 8.0.7
 
@@ -51,32 +51,39 @@ INSERT INTO `admin` (`id`, `username`, `email`, `password`) VALUES
 
 CREATE TABLE `booking` (
   `booking_id` int(100) NOT NULL,
-  `booking_slno` varchar(255) DEFAULT NULL,
+  `booking_slno` varchar(100) DEFAULT NULL,
+  `booking_datetime` varchar(6) DEFAULT NULL,
   `booking_time` varchar(255) DEFAULT NULL,
   `booking_date` varchar(255) DEFAULT NULL,
   `booking_name` varchar(255) DEFAULT NULL,
   `booking_mobile` varchar(255) DEFAULT NULL,
   `booking_email` varchar(255) DEFAULT NULL,
-  `booking_passengernum` varchar(255) DEFAULT NULL,
+  `booking_passengernum` int(100) DEFAULT NULL,
   `booking_pickuptime` varchar(255) DEFAULT NULL,
   `booking_pickupdate` varchar(255) DEFAULT NULL,
   `booking_pickupaddress` varchar(255) DEFAULT NULL,
   `booking_dropoffaddress` varchar(255) DEFAULT NULL,
-  `booking_ride_id` varchar(255) DEFAULT NULL,
+  `booking_ride_id` int(100) DEFAULT NULL,
   `booking_numofcars` int(100) DEFAULT NULL,
-  `booking_bkashno` varchar(255) DEFAULT NULL,
-  `booking_bkashtxid` varchar(255) DEFAULT NULL,
-  `username` varchar(255) DEFAULT NULL,
   `booking_cost` int(200) DEFAULT NULL,
-  `booking_days` int(200) DEFAULT NULL
+  `booking_days` int(200) DEFAULT NULL,
+  `booking_status` varchar(255) DEFAULT NULL,
+  `username` varchar(255) DEFAULT NULL,
+  `booking_bkashno` varchar(255) DEFAULT NULL,
+  `booking_bkashtxid` varchar(255) CHARACTER SET utf8 DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `booking`
 --
 
-INSERT INTO `booking` (`booking_id`, `booking_slno`, `booking_time`, `booking_date`, `booking_name`, `booking_mobile`, `booking_email`, `booking_passengernum`, `booking_pickuptime`, `booking_pickupdate`, `booking_pickupaddress`, `booking_dropoffaddress`, `booking_ride_id`, `booking_numofcars`, `booking_bkashno`, `booking_bkashtxid`, `username`, `booking_cost`, `booking_days`) VALUES
-(1, NULL, '10:20 am', 'Fri, 29-Oct-2021  ', 'M. Ali Abrar Khan', '', NULL, '', '', '', '38, Sultan Ahmed Road, Moulovi Para,1st floor, , Khulna Sadar, Khulna , Bangladesh', '', '5', 2, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `booking` (`booking_id`, `booking_slno`, `booking_datetime`, `booking_time`, `booking_date`, `booking_name`, `booking_mobile`, `booking_email`, `booking_passengernum`, `booking_pickuptime`, `booking_pickupdate`, `booking_pickupaddress`, `booking_dropoffaddress`, `booking_ride_id`, `booking_numofcars`, `booking_cost`, `booking_days`, `booking_status`, `username`, `booking_bkashno`, `booking_bkashtxid`) VALUES
+(1, '$booking_slno', '', '05:59 am', 'Sat, 30-Oct-2021  ', 'M. Ali Abrar Khan', '', '', 1, '07:59', '2021-10-27', '38, Sultan Ahmed Road, Moulovi Para,1st floor, , Khulna Sadar, Khulna , Bangladesh', '', 9, 2, 1800, 1, '', 'abrar', NULL, NULL),
+(2, '$booking_slno', '', '05:59 am', 'Sat, 30-Oct-2021  ', 'M. Ali Abrar Khan', '', '', 1, '07:59', '2021-10-27', '38, Sultan Ahmed Road, Moulovi Para,1st floor, , Khulna Sadar, Khulna , Bangladesh', '', 9, 2, 1800, 1, '', 'abrar', NULL, NULL),
+(3, '5354043010060706', '', '06:06 am', 'Sat, 30-Oct-2021  ', 'M. Al', '01939123946', 'mali@mail.com', 2, '06:06', '2021-10-28', '38, Sultan Ahmed Road, Moulovi Para,1st floor, , Khulna Sadar, Khulna , Bangladesh', 'askmdmsm', 8, 3, 2400, 1, '', 'abrar', NULL, NULL),
+(4, '1272993010063906', '', '06:06 am', 'Sat, 30-Oct-2021  ', '', '', '', 2, '06:06', '2021-10-28', '38, Sultan Ahmed Road, Moulovi Para,1st floor, , Khulna Sadar, Khulna , Bangladesh', 'askmdmsm', 8, 3, 2400, 1, '', 'abrar', NULL, NULL),
+(5, '1270743010084836', '', '08:36 am', 'Sat, 30-Oct-2021  ', 'Arman', '0193922222', 'mali@mail.com', 3, '01:36', '2021-10-31', '38, Sultan Ahmed Road, Moulovi Para,1st floor, , Khulna Sadar, Khulna , Bangladesh', 'kdslkam', 8, 1, 800, 1, '', 'abrar', '01923232322', 'awawewdad'),
+(6, '2790523010084342', '', '08:42 am', 'Sat, 30-Oct-2021  ', 'a', '1231231223', 'mli@mail.com', 1, '', '', '', '', 8, 1, 1600, 2, '', 'abrar', '', '');
 
 -- --------------------------------------------------------
 
@@ -86,9 +93,9 @@ INSERT INTO `booking` (`booking_id`, `booking_slno`, `booking_time`, `booking_da
 
 CREATE TABLE `rides` (
   `ride_id` int(100) NOT NULL,
-  `ride_type` varchar(255) DEFAULT NULL,
-  `ride_name` varchar(255) DEFAULT NULL,
-  `ride_image` varchar(255) NOT NULL,
+  `ride_type` varchar(255) CHARACTER SET utf8mb4 DEFAULT NULL,
+  `ride_name` varchar(255) CHARACTER SET utf8mb4 DEFAULT NULL,
+  `ride_image` varchar(255) CHARACTER SET utf8mb4 DEFAULT NULL,
   `ride_passengercap` int(100) DEFAULT NULL,
   `ride_baggagecap` int(100) DEFAULT NULL,
   `ride_count` int(100) DEFAULT NULL,
@@ -105,8 +112,8 @@ INSERT INTO `rides` (`ride_id`, `ride_type`, `ride_name`, `ride_image`, `ride_pa
 (3, 'Four Wheeler', 'Toyota Coralla', './img/ex_corolla.jpg', 4, 6, 800, 777, 2000),
 (5, 'Eight wheels', 'Hondai Bus', './img/20seatbus.jpg', 20, 100, 400, 400, 10000),
 (6, 'Eight wheels', 'Bus Large', './img/40seatbus.jpg', 40, 230, 300, 200, 12000),
-(7, 'Four Wheeler', 'Scorpio Jeep/ SUV', './img/jeep.jpg', 8, 20, 500, 300, 3000),
-(8, 'Three Wheeler', 'Auto Rickshaw-Battery ', './img/autorikshaw.jpg', 5, 6, 220, 208, 800),
+(7, 'Four Wheeler', 'Scorpio Jeep/ SUV', './img/jeep.jpg', 8, 20, 500, 283, 3000),
+(8, 'Three Wheeler', 'Auto Rickshaw-Battery ', './img/autorikshaw.jpg', 5, 6, 220, 205, 800),
 (9, 'Three Wheeler', 'Auto Rickshaw-Battery 2p', './img/autorikshaw2.jpg', 2, 3, 330, 328, 900);
 
 -- --------------------------------------------------------
@@ -143,7 +150,8 @@ ALTER TABLE `admin`
 -- Indexes for table `booking`
 --
 ALTER TABLE `booking`
-  ADD PRIMARY KEY (`booking_id`);
+  ADD PRIMARY KEY (`booking_id`),
+  ADD KEY `booking_ride_id` (`booking_ride_id`);
 
 --
 -- Indexes for table `rides`
@@ -171,7 +179,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `booking`
 --
 ALTER TABLE `booking`
-  MODIFY `booking_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `booking_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `rides`

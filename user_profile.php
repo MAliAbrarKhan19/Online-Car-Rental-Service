@@ -26,7 +26,8 @@ include 'mysqlconnect.php';
 <?php 
 
 include 'mysqlconnect.php';
-$query= "SELECT*FROM booking ORDER BY 'booking_id' DESC";
+$u=$_SESSION['username'];
+$query= "SELECT*FROM booking ORDER BY 'booking_id' ASC WHERE 'username'='$u' ";
 //ride_type,ride_name,ride_image,ride_passengercap,ride_baggagecap
 $result= mysqli_query($con, $query);
 $num_rows=mysqli_num_rows($result);
