@@ -8,7 +8,7 @@ date_default_timezone_set("ASIA/DHAKA");
 
   if (isset($_GET['logout'])) {
     session_destroy();
-    unset($_SESSION['username']);
+    unset($_SESSION['admin']);
     header("location: login.php");
   }
 
@@ -65,30 +65,39 @@ date_default_timezone_set("ASIA/DHAKA");
                         <a class="nav-link" href="managecars.php">Manage cars</a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link" href="managequotes.php">Quots</a>
+                        <!-- <a class="nav-link" href="managequotes.php">Quots</a> -->
                       </li>
-                      <li class="nav-item">
-                        <a class="nav-link" href="login.php ">Log in </a>
+                      <?php 
+                      if (!empty($_SESSION['admin'])) {
+                                echo "
+                       
+                      <li class='nav-item'>
+                          <a class='nav-link' href='?logout='1''>Log Out</a>
                       </li>
-                      <li class="nav-item">
-                          <a class="nav-link" href="?logout='1'">Log Out</a>
-
+                      "; }else{ echo "
+                      <li class='nav-item'>
+                        <a class='nav-link' href='login.php '>Log in </a>
                       </li>
+                      
                     </ul>
-                    
-                    <span class="navbar-text " style="">
-                      Get Your Ride Online! <a class="nav-link" href="tel:01700 888888">Call:01700 888888</a>
-                    </span>
-                    <span class="navbar-text ">
+                    ";} ?>
+
+                    <ul class="navbar-nav mr-3 ml-5">
+                    <li class="navbar-text ">
                        <a href="#"><?php 
-                              if (!empty($_SESSION['username'])) {
-                                echo "Admin Name: ".$_SESSION['username'];
+                              if (!empty($_SESSION['admin'])) {
+                                echo "|Admin:  ".$_SESSION['admin']."|";
                               }else {
-                                echo " <a href='login.php' >Log in </a> ";
+                                // echo " <a href='login.php' >Log in </a> ";
                               }
 
                        ?></a>
+                    </li>
+                  </ul>
+                    <span class="navbar-text ml-3" >
+                      Get Your Ride Online! <a class="nav-link" href="tel:01700 888888">Call:01700 888888</a>
                     </span>
+                    
                   </div>
             </nav>
       </div>

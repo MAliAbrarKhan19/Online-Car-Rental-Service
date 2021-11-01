@@ -95,6 +95,7 @@
                       
                       
                       <li class="nav-item">
+                        <a class="nav-link" href="admin.php">Our cars</a>
                         
                       </li>
                     </ul>
@@ -112,7 +113,7 @@
 
 
 
-    <div class="row" style="margin-bottom: 30px !important;">
+    <div class="row mb-2" >
       
       <div class="col-md-12"  style="
                     
@@ -145,7 +146,6 @@
     </div>  
 
 
-<div class="row" ><br></div>
 
 
 <!--   Header Ends     -->

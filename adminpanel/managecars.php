@@ -2,7 +2,7 @@
 	session_start(); 
 	include '../mysqlconnect.php';
 
-	if (!isset($_SESSION['username'])) {
+	if (!isset($_SESSION['admin'])) {
 		$_SESSION['msg'] = "You must log in first";
 		header('location: login.php');
 	}

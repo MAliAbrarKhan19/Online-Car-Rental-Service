@@ -28,7 +28,7 @@ session_start();
 			$results = mysqli_query($con, $query);
 
 			if (mysqli_num_rows($results) == 1) {
-				$_SESSION['username'] = $username;
+				$_SESSION['admin'] = $username;
 				$_SESSION['success'] = "You are now logged in";
 				header('location:admin.php');
 			}else {

@@ -42,7 +42,7 @@ include '../mysqlconnect.php';
 					  VALUES('$username', '$email', '$password')";
 			mysqli_query($con, $query);
 
-			// $_SESSION['username'] = $username;
+			// $_SESSION['admin'] = $username;
 			// $_SESSION['success'] = "You are now logged in";
 			//header('location: admin.php');
 		}

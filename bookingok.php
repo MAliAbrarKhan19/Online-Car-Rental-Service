@@ -263,11 +263,13 @@ if(isset($_POST['submit']))
 	$in="INSERT INTO booking(booking_slno, booking_datetime, booking_time, booking_date, booking_name, booking_mobile, booking_email, booking_passengernum, booking_pickuptime, booking_pickupdate, booking_pickupaddress, booking_dropoffaddress, booking_ride_id, booking_numofcars, booking_cost, booking_days, booking_status, username, booking_bkashno, booking_bkashtxid) VALUES ('$booking_slno', '$booking_datetime', '$booking_time', '$booking_date', '$booking_name', '$booking_mobile', '$booking_email', '$booking_passengernum', '$booking_pickuptime', '$booking_pickupdate', '$booking_pickupaddress', '$booking_dropoffaddress', '$booking_ride_id', '$booking_numofcars', '$booking_cost', '$booking_days', '$booking_status', '$username', '$booking_bkashno', '$booking_bkashtxid')";
 	if(mysqli_query($con,$in))
 	{
-	echo "<script type='text/javascript'>alert('Your booking is successfully submitted. Now please wait for our agent to call back to confirm the booking. Thankyou!')</script>";
+	echo "Your booking is successfully submitted. Now please wait for our agent to call back to confirm the booking. Thankyou";
 	// echo "<script>window.location.assign('thanksbooking.php')</script>";
 	}
 	else {
-		echo "<script type='text/javascript'>alert('!!NOT Submitted NOT!!! ERROR!! Please submit again. Thankyou...')</script>";
+
+		echo "!NOT Submitted NOT!!! ERROR!! Please submit again. Thankyou...";
+		// echo "<script type='text/javascript'>alert('!!NOT Submitted NOT!!! ERROR!! Please submit again. Thankyou...')</script>";
 	}
 
 	//CAr available
@@ -275,11 +277,12 @@ if(isset($_POST['submit']))
 	$in="UPDATE rides SET ride_count_status='$available_cars' WHERE ride_id='$booking_ride_id'";
 	if(mysqli_query($con,$in))
 	{
-	echo "<script type='text/javascript'>alert('Your booking is successfully submitted. Now please wait for our agent to call back to confirm the booking. Thankyou!')</script>";
+	// echo "<script type='text/javascript'>alert('Your booking is successfully submitted. Now please wait for our agent to call back to confirm the booking. Thankyou!')</script>";
+	echo "Your booking is successfully submitted. Now please wait for our agent to call back to confirm the booking. Thankyou";
 	echo "<script>window.location.assign('thanksbooking.php')</script>";
 	}
 	else {
-		echo "<script type='text/javascript'>alert('!!NOT Submitted NOT!!! ERROR!! Please submit again. Thankyou...')</script>";
+		echo "<script type='text/javascript'>alert('!!NOT Submitted NOT!!! ERROR!! Please submit again.')</script>";
 	}
 
 }	
